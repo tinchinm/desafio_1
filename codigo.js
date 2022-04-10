@@ -8,7 +8,7 @@ class Producto{
 
 let libros = [];
 
-for(let i = 0; i < 4; i++){
+for(let i = 0; i < 2; i++){
 
     let nombre = prompt("ingrese el nombre del libro");
     let stock = prompt("ingrese la cantidad disponible");
@@ -20,20 +20,29 @@ for(let i = 0; i < 4; i++){
 
 console.log(libros);
 
-console.log("La cantidad de libros en la biblioteca es de: " + libros.length + " libros.")
+let tabla = document.createElement("table");
 
-libros.sort((a, b) => {
-    if (a.precio > b.precio) {
-        return 1;
-    }
-    if (a.precio < b.precio) {
-        return -1;
-    }
-    return 0;
-});
+tabla.className = "tabla";
 
-console.log(libros);
+tabla.innerHTML = `
+                    <tr class=tabla_head>
+                        <td>Nombre</td>
+                        <td>Stock</td>
+                        <td>Precio</td>
+                    </tr>
+                `;
 
-libros.splice(2, 1);
+for (const libro of libros) {
 
-console.log(libros);
+let filas = document.createElement("tr")
+
+filas.innerHTML = `
+                    <td>${libro.nombre}</td>
+                    <td>${libro.stock}</td>
+                    <td>$ ${libro.precio}</td>
+                    `;
+
+tabla.appendChild(filas);
+}
+
+document.body.appendChild(tabla);
